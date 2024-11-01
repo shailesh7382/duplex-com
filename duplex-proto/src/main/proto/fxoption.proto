@@ -1,0 +1,99 @@
+syntax = "proto3";
+
+package com.example.shailesh.fxoption;
+
+// Enum representing the type of FXOption
+enum FXOptionType {
+    CALL = 0; // Call option
+    PUT = 1;  // Put option
+}
+
+// Enum representing the direction of the trade
+enum BuySell {
+    BUY = 0;  // Buy direction
+    SELL = 1; // Sell direction
+}
+
+// Enum representing the state of the trade
+enum TradeState {
+    TRADE_SUCCESS = 0; // Trade was successful
+    TRADE_FAILURE = 1; // Trade failed
+    PENDING = 2;       // Trade is pending
+}
+
+// Enum representing the status of the price response
+enum PriceRespStatus {
+    PRICE_SUCCESS = 0; // Price response was successful
+    PRICE_FAILURE = 1; // Price response failed
+}
+
+// Enum representing the reason for the trade status
+enum TradeStatusReason {
+    NONE = 0;                // No specific reason
+    INSUFFICIENT_FUNDS = 1;  // Insufficient funds
+    MARKET_CLOSED = 2;       // Market is closed
+    INVALID_QUANTITY = 3;    // Invalid quantity
+    OTHER = 4;               // Other reasons
+}
+
+// Message representing a Date
+message Date {
+    int32 year = 1;  // Year component of the date
+    int32 month = 2; // Month component of the date
+    int32 day = 3;   // Day component of the date
+}
+
+// Message representing FXOptionDetails
+message FXOptionDetails {
+    string underlyingCurrency = 1; // Underlying currency of the option
+    string strikeCurrency = 2;     // Strike currency of the option
+    double strikePrice = 3;        // Strike price of the option
+    Date expirationDate = 4;       // Expiration date of the option
+    FXOptionType optionType = 5;   // Type of the option (CALL or PUT)
+    string ccyPair = 6;            // Currency pair, e.g., "EUR/USD"
+    int32 quantity = 7;            // Quantity of the option
+}
+
+// Message representing a price request for FXOptionDetails
+message PriceRequest {
+    string priceRequestId = 1; // Unique ID for the price request
+    string cif = 2;            // Customer Identification File
+    FXOptionDetails option = 3; // FXOptionDetails details
+}
+
+// Message representing a price response for FXOptionDetails
+message PriceResponse {
+    string priceId = 1;         // Unique ID for the price response
+    string priceRequestId = 2;  // Unique ID for the price request
+    double price = 3;           // Price of the FXOptionDetails
+    PriceRespStatus status = 4; // Status of the price response
+}
+
+// Message representing a trade request for FXOptionDetails
+message TradeRequest {
+    string tradeId = 1; // Unique ID for the trade request
+    string priceId = 2; // Unique ID for the price response
+    string cif = 3;     // Customer Identification File
+    FXOptionDetails option = 4; // FXOptionDetails details
+    int32 quantity = 5;  // Quantity to trade
+    double price = 6;    // Price at which to trade
+    BuySell direction = 7; // Direction of the trade (BUY or SELL)
+}
+
+// Message representing a trade response for FXOptionDetails
+message TradeResponse {
+    string tradeId = 1;          // Unique ID for the trade response
+    int32 quantity = 2;          // Quantity traded
+    double price = 3;            // Price at which the trade was executed
+    TradeState status = 4;       // Status of the trade
+    TradeStatusReason reason = 5; // Reason for the trade status
+}
+
+// Service definition for FXOption trading
+service FXOptionService {
+    // RPC method to get price, returns a stream of PriceResponse
+    rpc GetPrice (PriceRequest) returns (stream PriceResponse);
+
+    // RPC method to trade an option, returns a TradeResponse
+    rpc TradeOption (TradeRequest) returns (TradeResponse);
+}
