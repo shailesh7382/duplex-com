@@ -131,3 +131,7 @@ duplex-proto/target/duplex-proto-1.0.0.jar.original
 duplex-proto/target/maven-archiver/pom.properties
 duplex-proto/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
 duplex-proto/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+duplex-client/target/classes/com/shailesh/service/FXOptionClientService.class
+duplex-client/target/classes/com/shailesh/service/FXOptionClientService$1.class
+duplex-client/target/classes/com/shailesh/service/FXOptionClientService.class
+duplex-client/target/classes/com/shailesh/service/FXOptionClientService$1.class

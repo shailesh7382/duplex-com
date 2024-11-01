@@ -9,6 +9,8 @@ import com.example.shailesh.fxoption.Fxoption.PriceRequest;
 import com.example.shailesh.fxoption.Fxoption.PriceResponse;
 import com.example.shailesh.fxoption.Fxoption.TradeRequest;
 import com.example.shailesh.fxoption.Fxoption.TradeResponse;
+import com.example.shailesh.fxoption.Fxoption.TradeState;
+import com.example.shailesh.fxoption.Fxoption.TradeStatusReason;
 
 import io.grpc.stub.StreamObserver;
 import org.slf4j.Logger;
@@ -32,7 +34,14 @@ public class FXOptionClientService {
             @Override
             public void onNext(PriceResponse priceResponse) {
                 logger.info("Price Response: {}", priceResponse);
-                callTradeOption(priceRequest, priceResponse);
+                // Simulate different scenarios based on the price response
+                if (priceResponse.getPrice() > 1.26) {
+                    logger.info("Simulating a successful trade scenario.");
+                    callTradeOption(priceRequest, priceResponse, true);
+                } else {
+                    logger.info("Simulating a failed trade scenario.");
+                    callTradeOption(priceRequest, priceResponse, false);
+                }
             }
 
             @Override
@@ -47,7 +56,7 @@ public class FXOptionClientService {
         });
     }
 
-    private void callTradeOption(PriceRequest priceRequest, PriceResponse priceResponse) {
+    private void callTradeOption(PriceRequest priceRequest, PriceResponse priceResponse, boolean isSuccess) {
         TradeRequest tradeRequest = TradeRequest.newBuilder()
                 .setTradeId("tr-789")
                 .setPriceId(priceResponse.getPriceId())
@@ -58,7 +67,25 @@ public class FXOptionClientService {
                 .setDirection(BuySell.BUY)
                 .build();
 
-        TradeResponse tradeResponse = fxOptionServiceBlockingStub.tradeOption(tradeRequest);
+        TradeResponse tradeResponse;
+        if (isSuccess) {
+            tradeResponse = TradeResponse.newBuilder()
+                    .setTradeId(tradeRequest.getTradeId())
+                    .setQuantity(tradeRequest.getQuantity())
+                    .setPrice(tradeRequest.getPrice())
+                    .setStatus(TradeState.TRADE_SUCCESS)
+                    .setReason(TradeStatusReason.NONE)
+                    .build();
+        } else {
+            tradeResponse = TradeResponse.newBuilder()
+                    .setTradeId(tradeRequest.getTradeId())
+                    .setQuantity(tradeRequest.getQuantity())
+                    .setPrice(tradeRequest.getPrice())
+                    .setStatus(TradeState.TRADE_FAILURE)
+                    .setReason(TradeStatusReason.INSUFFICIENT_FUNDS)
+                    .build();
+        }
+
         logger.info("Trade Response: {}", tradeResponse);
     }
 
