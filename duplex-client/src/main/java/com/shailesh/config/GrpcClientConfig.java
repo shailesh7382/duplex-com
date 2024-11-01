@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.example.shailesh.fxoption.FXOptionServiceGrpc;
+
 @Configuration
 public class GrpcClientConfig {
 
@@ -23,7 +25,12 @@ public class GrpcClientConfig {
     }
 
     @Bean
-    public com.example.shailesh.fxoption.FXOptionServiceGrpc.FXOptionServiceBlockingStub fxOptionServiceBlockingStub(ManagedChannel channel) {
-        return com.example.shailesh.fxoption.FXOptionServiceGrpc.newBlockingStub(channel);
+    public FXOptionServiceGrpc.FXOptionServiceStub fxOptionServiceStub(ManagedChannel channel) {
+        return FXOptionServiceGrpc.newStub(channel);
+    }
+
+    @Bean
+    public FXOptionServiceGrpc.FXOptionServiceBlockingStub fxOptionServiceBlockingStub(ManagedChannel channel) {
+        return FXOptionServiceGrpc.newBlockingStub(channel);
     }
 }
