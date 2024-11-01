@@ -122,3 +122,12 @@ duplex-proto/target/protoc-plugins/protoc-gen-grpc-java-1.42.1-osx-x86_64.exe
 duplex-proto/.DS_Store
 duplex-server/.DS_Store
 .DS_Store
+duplex-client/target/duplex-client-1.0.0.jar
+duplex-client/target/duplex-client-1.0.0.jar.original
+duplex-client/target/classes/application.properties
+duplex-client/target/maven-archiver/pom.properties
+duplex-proto/target/duplex-proto-1.0.0.jar
+duplex-proto/target/duplex-proto-1.0.0.jar.original
+duplex-proto/target/maven-archiver/pom.properties
+duplex-proto/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+duplex-proto/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
