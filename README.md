@@ -39,3 +39,18 @@ The `DuplexClientApplication` module is a Spring Boot application that acts as a
 - **`DuplexClientApplication` Class**: Bootstraps the Spring Boot application and manages the gRPC client operations.
 - **`GrpcClientConfig` Class**: Configures the gRPC client.
 - **`FXOptionClientService` Class**: Handles the gRPC client operations, including creating price requests, handling price responses, and executing trade requests.
+
+
+Running the Project
+
+```sh
+git clone https://github.com/your-repo/duplex-com.git
+
+cd duplex-com
+mvn clean install
+
+cd duplex-server
+mvn spring-boot:run
+
+cd duplex-client
+mvn spring-boot:run
