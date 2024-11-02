@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.Scheduled;
 
 @SpringBootApplication
 public class DuplexClientApplication implements CommandLineRunner {
@@ -36,10 +37,15 @@ public class DuplexClientApplication implements CommandLineRunner {
         fxOptionClientService.callGetPrice(fxOptionClientService.createPriceRequest());
     }
 
+     @Scheduled(fixedRate = 5000) // Send heartbeat every 5 seconds
+    public void sendHeartbeat() {
+        fxOptionClientService.sendHeartbeat();
+    }
+
     private void keepApplicationRunning() throws InterruptedException {
         // Keep the application running to receive the streaming responses
         logger.info("Keeping the application running to receive streaming responses...");
-        Thread.sleep(10000);
+        Thread.sleep(100000L);
     }
 
     private void shutdownChannel() {

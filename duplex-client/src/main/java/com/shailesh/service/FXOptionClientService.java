@@ -5,6 +5,8 @@ import com.example.shailesh.fxoption.Fxoption.BuySell;
 import com.example.shailesh.fxoption.Fxoption.Date;
 import com.example.shailesh.fxoption.Fxoption.FXOptionDetails;
 import com.example.shailesh.fxoption.Fxoption.FXOptionType;
+import com.example.shailesh.fxoption.Fxoption.HeartbeatRequest;
+import com.example.shailesh.fxoption.Fxoption.HeartbeatResponse;
 import com.example.shailesh.fxoption.Fxoption.PriceRequest;
 import com.example.shailesh.fxoption.Fxoption.PriceResponse;
 import com.example.shailesh.fxoption.Fxoption.TradeRequest;
@@ -103,5 +105,28 @@ public class FXOptionClientService {
                         .setQuantity(1000)
                         .build())
                 .build();
+    }
+
+     public void sendHeartbeat() {
+        HeartbeatRequest request = HeartbeatRequest.newBuilder()
+                .setMessage("ping")
+                .setTimestamp(System.currentTimeMillis())
+                .build();
+        fxOptionServiceStub.heartbeat(request, new StreamObserver<HeartbeatResponse>() {
+            @Override
+            public void onNext(HeartbeatResponse response) {
+                logger.info("Received HeartbeatResponse: {} at {}", response.getMessage(), response.getTimestamp());
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                logger.error("Error: {}", t.getMessage());
+            }
+
+            @Override
+            public void onCompleted() {
+                logger.info("Heartbeat completed");
+            }
+        });
     }
 }

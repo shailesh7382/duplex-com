@@ -1,6 +1,8 @@
 package com.shailesh.service;
 
 import com.example.shailesh.fxoption.*;
+import com.example.shailesh.fxoption.Fxoption.HeartbeatRequest;
+import com.example.shailesh.fxoption.Fxoption.HeartbeatResponse;
 import com.example.shailesh.fxoption.Fxoption.PriceRequest;
 import com.example.shailesh.fxoption.Fxoption.PriceRespStatus;
 import com.example.shailesh.fxoption.Fxoption.PriceResponse;
@@ -90,6 +92,17 @@ public class FXOptionServiceImpl extends FXOptionServiceGrpc.FXOptionServiceImpl
         // Log and send the response
         logger.info("Sending TradeResponse: {}", tradeResponse);
         responseObserver.onNext(tradeResponse);
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void heartbeat(HeartbeatRequest request, StreamObserver<HeartbeatResponse> responseObserver) {
+        logger.info("Received HeartbeatRequest: {} at {}", request.getMessage(), request.getTimestamp());
+        HeartbeatResponse response = HeartbeatResponse.newBuilder()
+                .setMessage("pong")
+                .setTimestamp(System.currentTimeMillis())
+                .build();
+        responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
 }

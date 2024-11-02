@@ -89,6 +89,19 @@ message TradeResponse {
     TradeStatusReason reason = 5; // Reason for the trade status
 }
 
+// Message representing a heartbeat request
+message HeartbeatRequest {
+    string message = 1; // Heartbeat message, e.g., "ping"
+    int64 timestamp = 2; // Timestamp in milliseconds
+}
+
+// Message representing a heartbeat response
+message HeartbeatResponse {
+    string message = 1; // Heartbeat response message, e.g., "pong"
+    int64 timestamp = 2; // Timestamp in milliseconds
+}
+
+
 // Service definition for FXOption trading
 service FXOptionService {
     // RPC method to get price, returns a stream of PriceResponse
@@ -96,4 +109,7 @@ service FXOptionService {
 
     // RPC method to trade an option, returns a TradeResponse
     rpc TradeOption (TradeRequest) returns (TradeResponse);
+
+    // RPC method for heartbeat
+    rpc Heartbeat (HeartbeatRequest) returns (HeartbeatResponse);
 }
