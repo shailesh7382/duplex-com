@@ -2,6 +2,9 @@ syntax = "proto3";
 
 package com.example.shailesh.fxoption;
 
+option java_package = "com.example.shailesh.fxoption";
+option java_outer_classname = "FxOptionProto";
+
 // Enum representing the type of FXOption
 enum FXOptionType {
     CALL = 0; // Call option
@@ -36,6 +39,14 @@ enum TradeStatusReason {
     OTHER = 4;               // Other reasons
 }
 
+// Enum representing the type of barrier option
+enum BarrierType {
+    UP_AND_IN = 0;    // Up-and-in barrier option
+    UP_AND_OUT = 1;   // Up-and-out barrier option
+    DOWN_AND_IN = 2;  // Down-and-in barrier option
+    DOWN_AND_OUT = 3; // Down-and-out barrier option
+}
+
 // Message representing a Date
 message Date {
     int32 year = 1;  // Year component of the date
@@ -52,6 +63,15 @@ message FXOptionDetails {
     FXOptionType optionType = 5;   // Type of the option (CALL or PUT)
     string ccyPair = 6;            // Currency pair, e.g., "EUR/USD"
     int32 quantity = 7;            // Quantity of the option
+    double premium = 8;            // Premium of the option
+    string tradeDate = 9;          // Trade date of the option
+    string settlementDate = 10;    // Settlement date of the option
+    string counterparty = 11;      // Counterparty of the option
+    string comments = 12;          // Additional comments or notes
+    BarrierType barrierType = 13;  // Type of barrier option
+    double barrierLevel = 14;      // Barrier level for single barrier options
+    double lowerBarrierLevel = 15; // Lower barrier level for double barrier options
+    double upperBarrierLevel = 16; // Upper barrier level for double barrier options
 }
 
 // Message representing a price request for FXOptionDetails
@@ -100,7 +120,6 @@ message HeartbeatResponse {
     string message = 1; // Heartbeat response message, e.g., "pong"
     int64 timestamp = 2; // Timestamp in milliseconds
 }
-
 
 // Service definition for FXOption trading
 service FXOptionService {

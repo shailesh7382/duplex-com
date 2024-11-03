@@ -1,20 +1,22 @@
 package com.shailesh.service;
 
 import com.example.shailesh.fxoption.*;
-import com.example.shailesh.fxoption.Fxoption.BuySell;
-import com.example.shailesh.fxoption.Fxoption.Date;
-import com.example.shailesh.fxoption.Fxoption.FXOptionDetails;
-import com.example.shailesh.fxoption.Fxoption.FXOptionType;
-import com.example.shailesh.fxoption.Fxoption.HeartbeatRequest;
-import com.example.shailesh.fxoption.Fxoption.HeartbeatResponse;
-import com.example.shailesh.fxoption.Fxoption.PriceRequest;
-import com.example.shailesh.fxoption.Fxoption.PriceResponse;
-import com.example.shailesh.fxoption.Fxoption.TradeRequest;
-import com.example.shailesh.fxoption.Fxoption.TradeResponse;
-import com.example.shailesh.fxoption.Fxoption.TradeState;
-import com.example.shailesh.fxoption.Fxoption.TradeStatusReason;
+import com.example.shailesh.fxoption.FxOptionProto.BuySell;
+import com.example.shailesh.fxoption.FxOptionProto.FXOptionDetails;
+import com.example.shailesh.fxoption.FxOptionProto.FXOptionType;
+import com.example.shailesh.fxoption.FxOptionProto.HeartbeatRequest;
+import com.example.shailesh.fxoption.FxOptionProto.HeartbeatResponse;
+import com.example.shailesh.fxoption.FxOptionProto.PriceRequest;
+import com.example.shailesh.fxoption.FxOptionProto.PriceResponse;
+import com.example.shailesh.fxoption.FxOptionProto.TradeRequest;
+import com.example.shailesh.fxoption.FxOptionProto.TradeResponse;
+import com.example.shailesh.fxoption.FxOptionProto.TradeState;
+import com.example.shailesh.fxoption.FxOptionProto.TradeStatusReason;
 
 import io.grpc.stub.StreamObserver;
+
+import java.sql.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,7 +101,7 @@ public class FXOptionClientService {
                         .setUnderlyingCurrency("USD")
                         .setStrikeCurrency("EUR")
                         .setStrikePrice(1.2)
-                        .setExpirationDate(Date.newBuilder().setYear(2023).setMonth(12).setDay(31).build())
+                        .setExpirationDate(com.example.shailesh.fxoption.FxOptionProto.Date.newBuilder().setYear(2023).setMonth(12).setDay(31).build())
                         .setOptionType(FXOptionType.CALL)
                         .setCcyPair("EUR/USD")
                         .setQuantity(1000)

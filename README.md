@@ -54,3 +54,7 @@ mvn spring-boot:run
 
 cd duplex-client
 mvn spring-boot:run
+```
+
+## others
+gRPC servers can be placed behind an Apache HTTP Server (httpd) acting as a reverse proxy. This setup can be useful for load balancing, SSL termination, and other HTTP-related functionalities. To configure Apache HTTP Server as a reverse proxy for gRPC, you need to use the mod_proxy and mod_proxy_http2 modules.

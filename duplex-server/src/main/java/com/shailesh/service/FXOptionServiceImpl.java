@@ -1,15 +1,15 @@
 package com.shailesh.service;
 
 import com.example.shailesh.fxoption.*;
-import com.example.shailesh.fxoption.Fxoption.HeartbeatRequest;
-import com.example.shailesh.fxoption.Fxoption.HeartbeatResponse;
-import com.example.shailesh.fxoption.Fxoption.PriceRequest;
-import com.example.shailesh.fxoption.Fxoption.PriceRespStatus;
-import com.example.shailesh.fxoption.Fxoption.PriceResponse;
-import com.example.shailesh.fxoption.Fxoption.TradeRequest;
-import com.example.shailesh.fxoption.Fxoption.TradeResponse;
-import com.example.shailesh.fxoption.Fxoption.TradeState;
-import com.example.shailesh.fxoption.Fxoption.TradeStatusReason;
+import com.example.shailesh.fxoption.FxOptionProto.HeartbeatRequest;
+import com.example.shailesh.fxoption.FxOptionProto.HeartbeatResponse;
+import com.example.shailesh.fxoption.FxOptionProto.PriceRequest;
+import com.example.shailesh.fxoption.FxOptionProto.PriceRespStatus;
+import com.example.shailesh.fxoption.FxOptionProto.PriceResponse;
+import com.example.shailesh.fxoption.FxOptionProto.TradeRequest;
+import com.example.shailesh.fxoption.FxOptionProto.TradeResponse;
+import com.example.shailesh.fxoption.FxOptionProto.TradeState;
+import com.example.shailesh.fxoption.FxOptionProto.TradeStatusReason;
 
 import io.grpc.stub.StreamObserver;
 import org.slf4j.Logger;
