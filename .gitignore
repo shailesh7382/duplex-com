@@ -203,3 +203,10 @@ duplex-proto/target/generated-sources/protobuf/java/com/example/shailesh/fxoptio
 duplex-client/target/classes/com/shailesh/service/FXOptionClientService.class
 duplex-client/target/classes/com/shailesh/service/FXOptionClientService$1.class
 /Simplex-Rest/target/
+/.idea/.gitignore
+/.idea/compiler.xml
+/.idea/encodings.xml
+/.idea/jarRepositories.xml
+/.idea/misc.xml
+/.idea/uiDesigner.xml
+/.idea/vcs.xml
