@@ -7,7 +7,7 @@ servers:
   - url: http://localhost:8080
     description: Local server
 paths:
-  /api/price/getPrice:
+  /price/getPrice:
     post:
       operationId: getPrice
       summary: Get price
@@ -27,7 +27,7 @@ paths:
                 $ref: '#/components/schemas/PriceResponse'
         '400':
           description: Invalid request due to missing or incorrect parameters.
-  /api/trade/tradeOption:
+  /trade/tradeOption:
     post:
       operationId: tradeOption
       summary: Trade option
@@ -47,7 +47,7 @@ paths:
                 $ref: '#/components/schemas/TradeResponse'
         '400':
           description: Invalid request due to missing or incorrect parameters.
-  /api/heartbeat:
+  /heartbeat:
     post:
       operationId: checkHeartbeat
       summary: Heartbeat
@@ -67,19 +67,6 @@ paths:
                 $ref: '#/components/schemas/HeartbeatResponse'
 components:
   schemas:
-    Date:
-      type: object
-      description: Represents a date with year, month, and day.
-      properties:
-        year:
-          type: integer
-          description: The year component of the date.
-        month:
-          type: integer
-          description: The month component of the date.
-        day:
-          type: integer
-          description: The day component of the date.
     FXOptionDetails:
       type: object
       description: Details of an FX option.
@@ -95,7 +82,8 @@ components:
           format: double
           description: The strike price of the option.
         expirationDate:
-          $ref: '#/components/schemas/Date'
+          type: string
+          format: date
           description: The expiration date of the option.
         optionType:
           type: string

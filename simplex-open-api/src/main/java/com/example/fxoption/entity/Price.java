@@ -1,6 +1,8 @@
 // Price.java
 package com.example.fxoption.entity;
 
+import com.example.fxoption.model.PriceResponse;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -43,5 +45,14 @@ public class Price {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public PriceResponse toPriceResponse() {
+        PriceResponse priceResponse = new PriceResponse();
+        priceResponse.setPriceId(this.priceId);
+        priceResponse.setPriceRequestId(this.priceRequestId);
+        priceResponse.setPrice(this.price);
+        priceResponse.setStatus(PriceResponse.StatusEnum.fromValue(this.status));
+        return priceResponse;
     }
 }

@@ -9,7 +9,7 @@ import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 
 @Entity
-public class TradeRequest {
+public class TradeRequestEntity {
     @Id
     private String tradeId;
     private String priceId;
@@ -18,7 +18,7 @@ public class TradeRequest {
     @AttributeOverrides({
         @AttributeOverride(name = "quantity", column = @Column(name = "option_quantity"))
     })
-    private FXOptionDetails option;
+    private FXOptionDetailsEntity option;
     private int quantity;
     private double price;
     private String direction;
@@ -48,11 +48,11 @@ public class TradeRequest {
         this.cif = cif;
     }
 
-    public FXOptionDetails getOption() {
+    public FXOptionDetailsEntity getOption() {
         return option;
     }
 
-    public void setOption(FXOptionDetails option) {
+    public void setOption(FXOptionDetailsEntity option) {
         this.option = option;
     }
 

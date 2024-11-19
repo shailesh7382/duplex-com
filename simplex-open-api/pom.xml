@@ -41,6 +41,16 @@
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>${springdoc.version}</version>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springdoc</groupId>-->
+<!--            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>-->
+<!--            <version>2.6.0</version>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-data-rest</artifactId>
+            <version>${springdoc.version}</version>
+        </dependency>
         <!-- @Nullable annotation -->
         <dependency>
             <groupId>com.google.code.findbugs</groupId>
@@ -95,7 +105,7 @@
                             <apiPackage>com.example.fxoption.api</apiPackage>
                             <modelPackage>com.example.fxoption.model</modelPackage>
                             <configOptions>
-                                <interfaceOnly>false</interfaceOnly>
+                                <interfaceOnly>true</interfaceOnly>
                                 <apiNameSuffix>Controller</apiNameSuffix>
                             </configOptions>
                             <enablePostProcessFile>true</enablePostProcessFile>

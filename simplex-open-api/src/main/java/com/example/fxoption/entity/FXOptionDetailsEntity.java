@@ -1,28 +1,27 @@
-// FXOptionDetails.java
+// FXOptionDetailsEntity.java
 package com.example.fxoption.entity;
 
-import javax.persistence.Embeddable;
+import java.time.LocalDate;
 
-@Embeddable
-public class FXOptionDetails {
+public class FXOptionDetailsEntity {
     private String underlyingCurrency;
     private String strikeCurrency;
     private double strikePrice;
-    private int expirationYear;
-    private int expirationMonth;
-    private int expirationDay;
+    private LocalDate expirationDate;
     private String optionType;
     private String ccyPair;
     private int quantity;
     private double premium;
-    private String tradeDate;
-    private String settlementDate;
+    private LocalDate tradeDate;
+    private LocalDate settlementDate;
     private String counterparty;
     private String comments;
     private String barrierType;
     private double barrierLevel;
     private double lowerBarrierLevel;
     private double upperBarrierLevel;
+
+    // Getters and setters
 
     public String getUnderlyingCurrency() {
         return underlyingCurrency;
@@ -48,28 +47,12 @@ public class FXOptionDetails {
         this.strikePrice = strikePrice;
     }
 
-    public int getExpirationYear() {
-        return expirationYear;
+    public LocalDate getExpirationDate() {
+        return expirationDate;
     }
 
-    public void setExpirationYear(int expirationYear) {
-        this.expirationYear = expirationYear;
-    }
-
-    public int getExpirationMonth() {
-        return expirationMonth;
-    }
-
-    public void setExpirationMonth(int expirationMonth) {
-        this.expirationMonth = expirationMonth;
-    }
-
-    public int getExpirationDay() {
-        return expirationDay;
-    }
-
-    public void setExpirationDay(int expirationDay) {
-        this.expirationDay = expirationDay;
+    public void setExpirationDate(LocalDate expirationDate) {
+        this.expirationDate = expirationDate;
     }
 
     public String getOptionType() {
@@ -104,19 +87,19 @@ public class FXOptionDetails {
         this.premium = premium;
     }
 
-    public String getTradeDate() {
+    public LocalDate getTradeDate() {
         return tradeDate;
     }
 
-    public void setTradeDate(String tradeDate) {
+    public void setTradeDate(LocalDate tradeDate) {
         this.tradeDate = tradeDate;
     }
 
-    public String getSettlementDate() {
+    public LocalDate getSettlementDate() {
         return settlementDate;
     }
 
-    public void setSettlementDate(String settlementDate) {
+    public void setSettlementDate(LocalDate settlementDate) {
         this.settlementDate = settlementDate;
     }
 

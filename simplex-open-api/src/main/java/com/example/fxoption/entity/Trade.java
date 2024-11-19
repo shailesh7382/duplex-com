@@ -1,6 +1,8 @@
 // Trade.java
 package com.example.fxoption.entity;
 
+import com.example.fxoption.model.TradeResponse;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -52,5 +54,15 @@ public class Trade {
 
     public void setReason(String reason) {
         this.reason = reason;
+    }
+
+    public TradeResponse toTradeResponse() {
+        TradeResponse tradeResponse = new TradeResponse();
+        tradeResponse.setTradeId(this.tradeId);
+        tradeResponse.setQuantity(this.quantity);
+        tradeResponse.setPrice(this.price);
+        tradeResponse.setStatus(TradeResponse.StatusEnum.fromValue(this.status));
+        tradeResponse.setReason(TradeResponse.ReasonEnum.fromValue(this.reason));
+        return tradeResponse;
     }
 }

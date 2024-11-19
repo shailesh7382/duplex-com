@@ -42,8 +42,8 @@ public class FxOptionApplicationTests {
         price.setStatus("PRICE_SUCCESS");
         priceRepository.save(price);
 
-        String priceRequestJson = "{ \"priceId\": \"1\", \"priceRequestId\": \"req1\", \"cif\": \"12345\", \"option\": { \"underlyingCurrency\": \"USD\", \"strikeCurrency\": \"EUR\", \"strikePrice\": 1.2, \"expirationDate\": { \"year\": 2023, \"month\": 12, \"day\": 31 }, \"optionType\": \"CALL\", \"ccyPair\": \"USD/EUR\", \"quantity\": 1000, \"premium\": 10.0, \"tradeDate\": \"2023-01-01\", \"settlementDate\": \"2023-01-02\", \"counterparty\": \"Bank\", \"comments\": \"\", \"barrierType\": \"UP_AND_IN\", \"barrierLevel\": 1.1, \"lowerBarrierLevel\": 1.0, \"upperBarrierLevel\": 1.2 } }";
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/price/getPrice")
+        String priceRequestJson = "{ \"priceId\": \"1\", \"priceRequestId\": \"req1\", \"cif\": \"12345\", \"option\": { \"underlyingCurrency\": \"USD\", \"strikeCurrency\": \"EUR\", \"strikePrice\": 1.2, \"expirationDate\": \"2023-01-01\", \"optionType\": \"CALL\", \"ccyPair\": \"USD/EUR\", \"quantity\": 1000, \"premium\": 10.0, \"tradeDate\": \"2023-01-01\", \"settlementDate\": \"2023-01-02\", \"counterparty\": \"Bank\", \"comments\": \"\", \"barrierType\": \"UP_AND_IN\", \"barrierLevel\": 1.1, \"lowerBarrierLevel\": 1.0, \"upperBarrierLevel\": 1.2 } }";
+        mockMvc.perform(MockMvcRequestBuilders.post("/price/getPrice")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(priceRequestJson))
                 .andExpect(status().isOk())
@@ -60,9 +60,9 @@ public class FxOptionApplicationTests {
         trade.setReason("NONE");
         tradeRepository.save(trade);
 
-        String tradeRequestJson = "{ \"tradeId\": \"1\", \"priceId\": \"1\", \"cif\": \"12345\", \"option\": { \"underlyingCurrency\": \"USD\", \"strikeCurrency\": \"EUR\", \"strikePrice\": 1.2, \"expirationDate\": { \"year\": 2023, \"month\": 12, \"day\": 31 }, \"optionType\": \"CALL\", \"ccyPair\": \"USD/EUR\", \"quantity\": 1000, \"premium\": 10.0, \"tradeDate\": \"2023-01-01\", \"settlementDate\": \"2023-01-02\", \"counterparty\": \"Bank\", \"comments\": \"\", \"barrierType\": \"UP_AND_IN\", \"barrierLevel\": 1.1, \"lowerBarrierLevel\": 1.0, \"upperBarrierLevel\": 1.2 }, \"quantity\": 1000, \"price\": 100.0, \"direction\": \"BUY\" }";
+        String tradeRequestJson = "{ \"tradeId\": \"1\", \"priceId\": \"1\", \"cif\": \"12345\", \"option\": { \"underlyingCurrency\": \"USD\", \"strikeCurrency\": \"EUR\", \"strikePrice\": 1.2, \"expirationDate\": \"2023-01-01\", \"optionType\": \"CALL\", \"ccyPair\": \"USD/EUR\", \"quantity\": 1000, \"premium\": 10.0, \"tradeDate\": \"2023-01-01\", \"settlementDate\": \"2023-01-02\", \"counterparty\": \"Bank\", \"comments\": \"\", \"barrierType\": \"UP_AND_IN\", \"barrierLevel\": 1.1, \"lowerBarrierLevel\": 1.0, \"upperBarrierLevel\": 1.2 }, \"quantity\": 1000, \"price\": 100.0, \"direction\": \"BUY\" }";
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/trade/tradeOption")
+        mockMvc.perform(MockMvcRequestBuilders.post("/trade/tradeOption")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(tradeRequestJson))
                 .andExpect(status().isOk())

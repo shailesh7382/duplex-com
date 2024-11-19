@@ -6,12 +6,12 @@ import javax.persistence.Id;
 import javax.persistence.Embedded;
 
 @Entity
-public class PriceRequest {
+public class PriceRequestEntity {
     @Id
     private String priceRequestId;
     private String cif;
     @Embedded
-    private FXOptionDetails option;
+    private FXOptionDetailsEntity option;
 
     // Getters and setters
     public String getPriceRequestId() {
@@ -30,11 +30,11 @@ public class PriceRequest {
         this.cif = cif;
     }
 
-    public FXOptionDetails getOption() {
+    public FXOptionDetailsEntity getOption() {
         return option;
     }
 
-    public void setOption(FXOptionDetails option) {
+    public void setOption(FXOptionDetailsEntity option) {
         this.option = option;
     }
 }
