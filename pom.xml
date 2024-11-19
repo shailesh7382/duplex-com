@@ -22,6 +22,7 @@
         <module>duplex-proto</module>
         <module>Simplex-Rest</module>
         <module>simplex-open-api</module>
+        <module>simplex-open-api-specs</module>
     </modules>
 
     <dependencyManagement>
