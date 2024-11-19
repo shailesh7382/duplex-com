@@ -9,7 +9,9 @@ servers:
 paths:
   /api/price/getPrice:
     post:
+      operationId: getPrice
       summary: Get price
+      description: Retrieve the price for a given FX option.
       requestBody:
         required: true
         content:
@@ -18,16 +20,18 @@ paths:
               $ref: '#/components/schemas/PriceRequest'
       responses:
         '200':
-          description: Successful response
+          description: Successful response with the price details.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PriceResponse'
         '400':
-          description: Invalid request
+          description: Invalid request due to missing or incorrect parameters.
   /api/trade/tradeOption:
     post:
+      operationId: tradeOption
       summary: Trade option
+      description: Execute a trade for a given FX option.
       requestBody:
         required: true
         content:
@@ -36,16 +40,18 @@ paths:
               $ref: '#/components/schemas/TradeRequest'
       responses:
         '200':
-          description: Successful response
+          description: Successful response with the trade details.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/TradeResponse'
         '400':
-          description: Invalid request
+          description: Invalid request due to missing or incorrect parameters.
   /api/heartbeat:
     post:
+      operationId: checkHeartbeat
       summary: Heartbeat
+      description: Check the heartbeat of the service.
       requestBody:
         required: true
         content:
@@ -54,7 +60,7 @@ paths:
               $ref: '#/components/schemas/HeartbeatRequest'
       responses:
         '200':
-          description: Successful response
+          description: Successful response with the heartbeat details.
           content:
             application/json:
               schema:
@@ -63,45 +69,64 @@ components:
   schemas:
     Date:
       type: object
+      description: Represents a date with year, month, and day.
       properties:
         year:
           type: integer
+          description: The year component of the date.
         month:
           type: integer
+          description: The month component of the date.
         day:
           type: integer
+          description: The day component of the date.
     FXOptionDetails:
       type: object
+      description: Details of an FX option.
       properties:
         underlyingCurrency:
           type: string
+          description: The currency of the underlying asset.
         strikeCurrency:
           type: string
+          description: The currency in which the strike price is denominated.
         strikePrice:
           type: number
           format: double
+          description: The strike price of the option.
         expirationDate:
           $ref: '#/components/schemas/Date'
+          description: The expiration date of the option.
         optionType:
           type: string
           enum:
             - CALL
             - PUT
+          description: The type of the option (CALL or PUT).
         ccyPair:
           type: string
+          description: The currency pair for the option.
         quantity:
           type: integer
+          description: The quantity of the option.
         premium:
           type: number
           format: double
+          description: The premium of the option.
         tradeDate:
           type: string
+          format: date
+          description: The trade date of the option.
         settlementDate:
           type: string
+          format: date
+          description: The settlement date of the option.
         counterparty:
           type: string
+          description: The counterparty of the option.
         comments:
           type: string
+          description: Additional comments about the option.
         barrierType:
           type: string
           enum:
@@ -109,76 +134,102 @@ components:
             - UP_AND_OUT
             - DOWN_AND_IN
             - DOWN_AND_OUT
+          description: The type of barrier for the option.
         barrierLevel:
           type: number
           format: double
+          description: The barrier level of the option.
         lowerBarrierLevel:
           type: number
           format: double
+          description: The lower barrier level of the option.
         upperBarrierLevel:
           type: number
           format: double
+          description: The upper barrier level of the option.
     PriceRequest:
       type: object
+      description: Request to get the price of an FX option.
       properties:
         priceRequestId:
           type: string
+          description: The unique identifier for the price request.
         cif:
           type: string
+          description: The customer identification file (CIF) of the requester.
         option:
           $ref: '#/components/schemas/FXOptionDetails'
+          description: The details of the FX option.
     PriceResponse:
       type: object
+      description: Response containing the price of an FX option.
       properties:
         priceId:
           type: string
+          description: The unique identifier for the price.
         priceRequestId:
           type: string
+          description: The unique identifier for the price request.
         price:
           type: number
           format: double
+          description: The price of the FX option.
         status:
           type: string
           enum:
             - PRICE_SUCCESS
             - PRICE_FAILURE
+          description: The status of the price request.
     TradeRequest:
       type: object
+      description: Request to trade an FX option.
       properties:
         tradeId:
           type: string
+          description: The unique identifier for the trade.
         priceId:
           type: string
+          description: The unique identifier for the price.
         cif:
           type: string
+          description: The customer identification file (CIF) of the requester.
         option:
           $ref: '#/components/schemas/FXOptionDetails'
+          description: The details of the FX option.
         quantity:
           type: integer
+          description: The quantity of the option to be traded.
         price:
           type: number
           format: double
+          description: The price of the FX option.
         direction:
           type: string
           enum:
             - BUY
             - SELL
+          description: The direction of the trade (BUY or SELL).
     TradeResponse:
       type: object
+      description: Response containing the details of the trade.
       properties:
         tradeId:
           type: string
+          description: The unique identifier for the trade.
         quantity:
           type: integer
+          description: The quantity of the option traded.
         price:
           type: number
           format: double
+          description: The price of the FX option.
         status:
           type: string
           enum:
             - TRADE_SUCCESS
             - TRADE_FAILURE
             - PENDING
+          description: The status of the trade.
         reason:
           type: string
           enum:
@@ -187,19 +238,26 @@ components:
             - MARKET_CLOSED
             - INVALID_QUANTITY
             - OTHER
+          description: The reason for the trade status.
     HeartbeatRequest:
       type: object
+      description: Request to check the heartbeat of the service.
       properties:
         message:
           type: string
+          description: The message to be sent in the heartbeat request.
         timestamp:
           type: integer
           format: int64
+          description: The timestamp of the heartbeat request.
     HeartbeatResponse:
       type: object
+      description: Response containing the details of the heartbeat.
       properties:
         message:
           type: string
+          description: The message received in the heartbeat response.
         timestamp:
           type: integer
           format: int64
+          description: The timestamp of the heartbeat response.

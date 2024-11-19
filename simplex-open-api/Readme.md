@@ -27,3 +27,9 @@ simplex-open-api/
 │               └── example/
 │                   └── fxoption/
 │                       └── FxOptionApplicationTests.java
+
+
+*** Backward-Compatible Changes: Ensure changes are additive and do not remove or alter existing functionality.  
+
+- Add New Fields: Adding new fields to responses is generally safe.
+- Optional Parameters: Add new optional parameters to requests.
