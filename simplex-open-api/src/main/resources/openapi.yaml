@@ -1,0 +1,205 @@
+openapi: 3.0.0
+info:
+  title: FXOption API
+  version: 1.0.0
+  description: API documentation for FXOption service
+servers:
+  - url: http://localhost:8080
+    description: Local server
+paths:
+  /api/price/getPrice:
+    post:
+      summary: Get price
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PriceRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriceResponse'
+        '400':
+          description: Invalid request
+  /api/trade/tradeOption:
+    post:
+      summary: Trade option
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TradeRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TradeResponse'
+        '400':
+          description: Invalid request
+  /api/heartbeat:
+    post:
+      summary: Heartbeat
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HeartbeatRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HeartbeatResponse'
+components:
+  schemas:
+    Date:
+      type: object
+      properties:
+        year:
+          type: integer
+        month:
+          type: integer
+        day:
+          type: integer
+    FXOptionDetails:
+      type: object
+      properties:
+        underlyingCurrency:
+          type: string
+        strikeCurrency:
+          type: string
+        strikePrice:
+          type: number
+          format: double
+        expirationDate:
+          $ref: '#/components/schemas/Date'
+        optionType:
+          type: string
+          enum:
+            - CALL
+            - PUT
+        ccyPair:
+          type: string
+        quantity:
+          type: integer
+        premium:
+          type: number
+          format: double
+        tradeDate:
+          type: string
+        settlementDate:
+          type: string
+        counterparty:
+          type: string
+        comments:
+          type: string
+        barrierType:
+          type: string
+          enum:
+            - UP_AND_IN
+            - UP_AND_OUT
+            - DOWN_AND_IN
+            - DOWN_AND_OUT
+        barrierLevel:
+          type: number
+          format: double
+        lowerBarrierLevel:
+          type: number
+          format: double
+        upperBarrierLevel:
+          type: number
+          format: double
+    PriceRequest:
+      type: object
+      properties:
+        priceRequestId:
+          type: string
+        cif:
+          type: string
+        option:
+          $ref: '#/components/schemas/FXOptionDetails'
+    PriceResponse:
+      type: object
+      properties:
+        priceId:
+          type: string
+        priceRequestId:
+          type: string
+        price:
+          type: number
+          format: double
+        status:
+          type: string
+          enum:
+            - PRICE_SUCCESS
+            - PRICE_FAILURE
+    TradeRequest:
+      type: object
+      properties:
+        tradeId:
+          type: string
+        priceId:
+          type: string
+        cif:
+          type: string
+        option:
+          $ref: '#/components/schemas/FXOptionDetails'
+        quantity:
+          type: integer
+        price:
+          type: number
+          format: double
+        direction:
+          type: string
+          enum:
+            - BUY
+            - SELL
+    TradeResponse:
+      type: object
+      properties:
+        tradeId:
+          type: string
+        quantity:
+          type: integer
+        price:
+          type: number
+          format: double
+        status:
+          type: string
+          enum:
+            - TRADE_SUCCESS
+            - TRADE_FAILURE
+            - PENDING
+        reason:
+          type: string
+          enum:
+            - NONE
+            - INSUFFICIENT_FUNDS
+            - MARKET_CLOSED
+            - INVALID_QUANTITY
+            - OTHER
+    HeartbeatRequest:
+      type: object
+      properties:
+        message:
+          type: string
+        timestamp:
+          type: integer
+          format: int64
+    HeartbeatResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        timestamp:
+          type: integer
+          format: int64

@@ -21,6 +21,7 @@
         <module>duplex-server</module>
         <module>duplex-proto</module>
         <module>Simplex-Rest</module>
+        <module>simplex-open-api</module>
     </modules>
 
     <dependencyManagement>
