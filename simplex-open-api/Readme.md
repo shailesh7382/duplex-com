@@ -49,3 +49,8 @@ simplex-open-api/
 - read open api spec in openapi.yaml
 - add open api dependencies. project adds for spring boot < 3.0.0
 - generate api code and data exchange objects from open api spec
+
+
+The PriceController correctly implements the getPrice endpoint as defined in the OpenAPI specification. The method accepts a PriceRequest object and returns a PriceResponse object.  
+
+The TradeController correctly implements the tradeOption endpoint as defined in the OpenAPI specification. The method accepts a TradeRequest object and returns a TradeResponse object.

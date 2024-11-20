@@ -105,9 +105,10 @@
                             <output>${project.build.directory}/generated-sources/openapi</output>
                             <apiPackage>com.example.fxoption.api</apiPackage>
                             <modelPackage>com.example.fxoption.model</modelPackage>
+                            <invokerPackage>com.example.fxoption.client.invoker</invokerPackage>
                             <configOptions>
                                 <interfaceOnly>true</interfaceOnly>
-                                <apiNameSuffix>Controller</apiNameSuffix>
+                                <library>spring-boot</library>
                             </configOptions>
                             <enablePostProcessFile>true</enablePostProcessFile>
                         </configuration>
