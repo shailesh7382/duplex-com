@@ -76,3 +76,6 @@ Here are the considerations for each:
 ## Cons:
 - Less structured than gRPC.
 - Requires handling connection lifecycle.
+
+
+WebClient(Spring WebFlux) is a non-blocking, reactive client that can handle high concurrency and is more efficient for high-frequency calls.
