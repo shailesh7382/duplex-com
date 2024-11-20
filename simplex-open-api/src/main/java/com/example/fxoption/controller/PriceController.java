@@ -2,6 +2,7 @@
 package com.example.fxoption.controller;
 
 import com.example.fxoption.api.PriceApi;
+import com.example.fxoption.api.PriceRequestsApi;
 import com.example.fxoption.entity.PriceRequestEntityBuilder;
 import com.example.fxoption.entity.Price;
 import com.example.fxoption.entity.PriceRequestEntity;
@@ -12,10 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class PriceController implements PriceApi {
     @Autowired
     private PriceService priceService;
+
 
     public ResponseEntity<PriceResponse> getPrice(@RequestBody PriceRequest priceRequest) {
         PriceRequestEntity priceRequestEntity = PriceRequestEntityBuilder.from(priceRequest).build();

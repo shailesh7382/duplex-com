@@ -65,6 +65,22 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HeartbeatResponse'
+  /price-requests:
+    get:
+      operationId: getAllPriceRequests
+      summary: Get all price requests
+      description: Retrieve all price requests done previously.
+      responses:
+        '200':
+          description: Successful response with the list of price requests.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PriceRequest'
+        '500':
+          description: Internal server error.
 components:
   schemas:
     FXOptionDetails:
