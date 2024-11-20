@@ -9,8 +9,7 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>simplex-open-api-specs</artifactId>
-
+    <artifactId>simplex-open-api-client</artifactId>
 
     <properties>
         <springdoc.version>1.6.8</springdoc.version>
@@ -36,22 +35,7 @@
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-commons</artifactId>
         </dependency>
-        <!--SpringDoc dependencies -->
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-ui</artifactId>
-            <version>${springdoc.version}</version>
-        </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>org.springdoc</groupId>-->
-        <!--            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>-->
-        <!--            <version>2.6.0</version>-->
-        <!--        </dependency>-->
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-data-rest</artifactId>
-            <version>${springdoc.version}</version>
-        </dependency>
+
         <!-- @Nullable annotation -->
         <dependency>
             <groupId>com.google.code.findbugs</groupId>
@@ -85,39 +69,18 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>simplex-open-api-specs</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
-                <groupId>org.openapitools</groupId>
-                <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>6.0.1</version>
-                <executions>
-                    <execution>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <inputSpec>${project.basedir}/src/main/resources/openapi.yaml</inputSpec>
-                            <generatorName>spring</generatorName>
-<!--                            <generatorName>java</generatorName>-->
-                            <output>${project.build.directory}/generated-sources/openapi</output>
-                            <apiPackage>com.example.fxoption.api</apiPackage>
-                            <modelPackage>com.example.fxoption.model</modelPackage>
-                            <invokerPackage>com.example.fxoption.client</invokerPackage>
-                            <configOptions>
-                                <interfaceOnly>true</interfaceOnly>
-                                <library>spring-boot</library>
-<!--                                <library>webclient</library>-->
-                            </configOptions>
-                            <enablePostProcessFile>true</enablePostProcessFile>
-                        </configuration>
-                    </execution>
-                </executions>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
-
 </project>

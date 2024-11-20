@@ -23,6 +23,7 @@
 <!--        <module>Simplex-Rest</module>-->
         <module>simplex-open-api</module>
         <module>simplex-open-api-specs</module>
+        <module>simplex-open-api-client</module>
     </modules>
 
     <dependencyManagement>

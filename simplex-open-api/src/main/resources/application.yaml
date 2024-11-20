@@ -12,3 +12,7 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+cors:
+  allowed:
+    origins: "http://allowed-origin.com,http://localhost:8081"

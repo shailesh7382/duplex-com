@@ -213,3 +213,4 @@ duplex-client/target/classes/com/shailesh/service/FXOptionClientService$1.class
 /simplex-open-api/target/
 /.idea/swagger-settings.xml
 /simplex-open-api-specs/target/
+/simplex-open-api-client/target/
